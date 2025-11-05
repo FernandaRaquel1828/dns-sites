@@ -1,0 +1,75 @@
+services:
+
+  dns-server:
+    build: ./dns
+    container_name: dns
+    image: dns:lab
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    networks:
+      labname:
+        ipv4_address: 192.168.0.2
+    restart: unless-stopped
+
+  web1:
+    build: ./siteA
+    container_name: web1
+    ports: 
+      - "8081:80"
+    networks:
+      labname:
+        ipv4_address: 192.168.0.10
+    dns:
+      - 192.168.0.2
+      - 8.8.8.8
+    dns_search: []
+    restart: unless-stopped
+
+  web2:
+    build: ./siteB
+    container_name: web2
+    ports: 
+      - "8082:80"
+    networks:
+      labname:
+        ipv4_address: 192.168.0.11
+    dns:
+      - 192.168.0.2
+      - 8.8.8.8
+    dns_search: []
+    restart: unless-stopped
+
+  web3:
+    build: ./siteC
+    container_name: web3
+    ports: 
+      - "8083:80"
+    networks:
+      labname:
+        ipv4_address: 192.168.0.12
+    dns:
+      - 192.168.0.2
+      - 8.8.8.8
+    dns_search: []
+    restart: unless-stopped
+
+  web4:
+    build: ./siteD
+    container_name: web4
+    ports: 
+      - "8084:80"
+    networks:
+      labname:
+        ipv4_address: 192.168.0.13
+    dns:
+      - 192.168.0.2
+      - 8.8.8.8
+    dns_search: []
+    restart: unless-stopped
+
+networks:
+  labname: 
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24

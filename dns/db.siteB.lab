@@ -1,0 +1,15 @@
+;
+; BIND data file for asa.br zone
+;
+$TTL	604800
+@	IN	SOA	ns.siteB.lab. root.siteB.lab. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@		IN	NS	ns.
+ns		IN	A	192.168.0.2
+www		IN	A	192.168.0.12
+api 	IN	A	192.168.0.13
